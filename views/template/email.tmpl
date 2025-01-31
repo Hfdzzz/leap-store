@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Order Summary</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .header {
+            background-color: #4caf50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content h2 {
+            color: #333;
+            font-size: 20px;
+        }
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .cart-table th, .cart-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .cart-table th {
+            background-color: #f8f8f8;
+        }
+        .cart-table td {
+            background-color: #ffffff;
+        }
+        .footer {
+            background-color: #4caf50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+        }
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Thank You for Your Order, {{ .Username }}!</h1>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <h2>Your Order Summary</h2>
+
+            <!-- Cart Table -->
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price (Each)</th>
+                        <th>Total Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{ range .Carts }}
+                    <tr>
+                        <td>{{ .Name_Product }}</td>
+                        <td>{{ .Amount_Product }}</td>
+                        <td>{{ .Price_Product }}</td>
+                        <td>{{ .Total_Price }}</td>
+                    </tr>
+                    {{ end }}
+                </tbody>
+            </table>
+
+            <!-- Total Price -->
+            <div class="total">
+                Grand Total: ${{ .Total_Price_of_All_Product }}
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            © 2025 Leap Store | All Rights Reserved
+        </div>
+    </div>
+</body>
+</html>
